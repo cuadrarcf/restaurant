@@ -1,0 +1,17 @@
+.app-header {
+    background-color: white;
+    padding-top: 5px;
+    height: 72px;
+}
+
+.app-header .ant-divider {
+    height: 64px;
+}
+
+.app-header .ant-col {
+    /*background-color: #F0F2F5;*/
+}
+
+
+
+

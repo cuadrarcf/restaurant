@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: restaurant
+build:
+  artifacts:
+    - image: gcr.io/poised-octane-241023/restaurant-app
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes/restaurant.deployment.yaml
+    - kubernetes/restaurant.service.yaml
