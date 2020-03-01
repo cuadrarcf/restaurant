@@ -1,6 +1,8 @@
 # Restaurant Desktop APP
 
-#### Problem to solve
+![Architecture Diagram](./public/img/demo.png)
+
+#### Problem to solve:
 
 A restaurant needs to keep track on how many ingredients it has left in stock after each order has been placed.
 They also want to know how many times a recipe has been ordered.
@@ -26,9 +28,9 @@ https://app.swaggerhub.com/apis/d65yan/restaurant/0.0.0
 The Manager does not have a development environment so anything you can do to make it easier to view the code and the running result would be highly appreciated.
 
 ## Options
-
 development: `npm start` <br/>
-deployment: `npm run build`, `npm run serve`
+deployment: `npm run build`, `npm run serve` <br/>
+demo: http://35.196.91.62/ingredients
 
 # Tech Stacks
 <ul>
