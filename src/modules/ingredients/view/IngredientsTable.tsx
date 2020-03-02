@@ -32,12 +32,12 @@ const columns = [
     title: 'Colors',
     dataIndex: 'colors',
     key: 'colors',
-    render:(v: string[]) => v && v.map((c:string) => <Tag color={c} style={{color:'black', borderColor:'#d9d9d9'}}>{c}</Tag> )
+    render:(v: string[]) => v && v.map((c:string) => <Tag key={c} color={c} style={{color:'black', borderColor:'#d9d9d9'}}>{c}</Tag> )
   },
 ];
 
 export function IngredientsTable(props: IIngredientsTable) {
   const { dataSource } = props;
-  return <Table dataSource={dataSource} columns={columns} />;
+  return <Table rowKey="id" dataSource={dataSource} columns={columns} />;
 }
 
