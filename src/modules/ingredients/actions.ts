@@ -1,6 +1,21 @@
 const MODULE = 'INGREDIENTS';
 
-const actions = {
+export interface IActions {
+  LOAD: string;
+  LOAD_SUCCESS: string;
+  LOAD_ERROR: string;
+  SAVE_TO_API: string;
+  TOGGLE_HANDLE_MODAL: string;
+  UPDATE_SELECTED: string;
+  load: () => { type: string };
+  loadSuccess: (data: any) => { payload: { data: any }; type: string };
+  loadError: (error: any) => { payload: { error: any }; type: string };
+  saveToApi: (data: any, actionName?: string) => { payload: { data: any; actionName: string }; type: string };
+  toggleModal: (data?: any) => { payload: { data: any }; type: string };
+  updateSelected: (data: any) => { payload: { data: any }; type: string };
+}
+
+const actions: IActions = {
   LOAD: `LOAD_${MODULE}`,
   LOAD_SUCCESS: `LOAD_SUCCESS_${MODULE}`,
   LOAD_ERROR: `LOAD_ERROR_${MODULE}`,
@@ -13,6 +28,7 @@ const actions = {
   load: () => {
     return { type: actions.LOAD };
   },
+
   loadSuccess: (data: any) => ({
     type: actions.LOAD_SUCCESS,
     payload: { data }
@@ -35,7 +51,7 @@ const actions = {
   }),
 
   // selected
-  updateSelected: (data:any) => ({
+  updateSelected: (data: any) => ({
     type: actions.UPDATE_SELECTED,
     payload: { data }
   })

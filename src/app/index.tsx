@@ -5,7 +5,7 @@ import { Layout } from 'antd';
 import { createAppStore } from './store';
 import { Dashboard } from '../modules/dashboard';
 import { Orders } from '../modules/orders';
-import { Ingredients } from '../modules/ingredients';
+import IngredientsContainer from '../modules/ingredients';
 import { Recipes } from '../modules/recipes';
 import { LeftMenu } from './view/leftMenu';
 import AppHeader from './view/header/AppHeader';
@@ -18,6 +18,7 @@ const { Footer } = Layout;
 const { store } = createAppStore(mergeReducers(), mergeSagas());
 
 class App extends React.Component {
+
   state = {
     collapsed: false
   };
@@ -45,13 +46,13 @@ class App extends React.Component {
                   <Orders />
                 </Route>
                 <Route path="/ingredients">
-                  <Ingredients />
+                  <IngredientsContainer />
                 </Route>
                 <Route path="/recipes">
                   <Recipes />
                 </Route>
               </Switch>
-              <Footer style={{ textAlign: 'center' }}>Restaurant ©2020 Created by Roberley</Footer>
+              <Footer style={{ textAlign: 'center' }}>Restaurant ©2020 Created by <a href="https://www.linkedin.com/in/roberley">Roberley Cuadra.</a></Footer>
             </Layout>
           </Layout>
         </Router>
