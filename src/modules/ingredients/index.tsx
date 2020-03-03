@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { AppContent } from '../../app/view/appContent';
 import { Button, Col, Row } from 'antd';
