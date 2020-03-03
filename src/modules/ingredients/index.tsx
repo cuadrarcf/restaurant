@@ -10,6 +10,7 @@ import { IReducer } from './reducers';
 interface IIngredientState {}
 
 class Ingredients extends React.Component<IReducer & IActions, IIngredientState> {
+
   componentDidMount(): void {
     this.props.load();
   }
