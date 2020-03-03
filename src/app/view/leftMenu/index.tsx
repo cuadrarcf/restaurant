@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
+import { PieChartOutlined, BellOutlined, ReadOutlined, DatabaseOutlined } from '@ant-design/icons';
 import './index.css';
 
 const { Sider } = Layout;
@@ -13,29 +14,29 @@ interface IMenuProps {
 interface IMenuItems {
   path: string;
   label: string;
-  icon: string;
+  icon: any;
 }
 
 const menu: IMenuItems[] = [
   {
     path: '/dashboard',
     label: 'Dashboard',
-    icon: 'pie-chart'
+    icon: () => <PieChartOutlined />
   },
   {
     path: '/orders',
     label: 'Orders',
-    icon: 'bell'
+    icon: () => <BellOutlined />
   },
   {
     path: '/recipes',
     label: 'Recipes',
-    icon: 'read'
+    icon: () => <ReadOutlined />
   },
   {
     path: '/ingredients',
     label: 'Ingredients',
-    icon: 'database'
+    icon: () => <DatabaseOutlined />
   }
 ];
 
@@ -51,13 +52,17 @@ export function LeftMenu(props: IMenuProps) {
       </div>
 
       <Menu theme="light" defaultSelectedKeys={selected} mode="inline">
-        {menu.map((item, pos) => (
-          <Menu.Item key={item.path}>
-            <Icon type={item.icon} />
-            <span>{item.label}</span>
-            <Link to={`${item.path}`}>{item.label}</Link>
-          </Menu.Item>
-        ))}
+        {menu.map((item, pos) => {
+          const MenuIcon = item.icon;
+
+          return (
+            <Menu.Item key={item.path}>
+              <MenuIcon />
+              <span>{item.label}</span>
+              <Link to={`${item.path}`}>{item.label}</Link>
+            </Menu.Item>
+          );
+        })}
       </Menu>
     </Sider>
   );

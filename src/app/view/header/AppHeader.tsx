@@ -16,7 +16,7 @@ function AppHeader(props: appHeaderParams) {
 
   return (
     <Header className="app-header">
-      <Row type="flex" justify="center">
+      <Row justify="center">
         <Divider type="vertical" />
         <Col span={4}>
           <Statistic title="Pending Orders" value={pending || 0} />

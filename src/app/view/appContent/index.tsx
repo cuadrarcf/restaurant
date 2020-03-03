@@ -16,7 +16,7 @@ export function AppContent(props: IAppContent) {
   return (
     <Content className="app-content">
       <Row>
-        <Col>
+        <Col span={24}>
           <Title level={3}>{title}</Title>
           <article className="main-place">{children}</article>
         </Col>
