@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppContent } from '../../app/view/appContent';
 import { Button, Col, Row } from 'antd';
+import { AppContent } from '../../app/view/appContent';
 import { IngredientsTable } from './view/IngredientsTable';
 import { items } from '../../app/services';
 import actions, { IActions } from './actions';
