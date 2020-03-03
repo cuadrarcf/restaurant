@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Button, Col, Row } from 'antd';
 import { AppContent } from '../../app/view/appContent';
 import { IngredientsTable } from './view/IngredientsTable';
-import { items } from '../../app/services';
 import actions, { IActions } from './actions';
 import { IReducer } from './reducers';
 
@@ -20,7 +19,8 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
   }
 
   render() {
-    console.log(this.props.isLoading);
+
+    const {models, isLoading} = this.props;
 
     return (
       <AppContent title="Ingredients">
@@ -29,7 +29,7 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
             <Button type="primary" onClick={event => this.togglePopup(null)}>
               Add
             </Button>
-            <IngredientsTable dataSource={items} />
+            <IngredientsTable dataSource={models} isLoading={isLoading} />
           </Col>
         </Row>
       </AppContent>

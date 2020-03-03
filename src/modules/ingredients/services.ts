@@ -1,28 +1,26 @@
-import Axios from 'axios';
-
-const service = ()=> Axios;
+import { service } from '../../app/services';
 
 const servicesApi = {
   list: () =>
-    service()
-      .get('/appattributes')
+    service
+      .get('/items')
       .then(response => response.data)
       .catch(error => error),
   create: (payload: any) =>
-    service()
-      .post('/appattributes', payload)
+    service
+      .post('/items', payload)
       .then(response => response.data)
       .catch(error => error),
   update: (id: any, payload: any) =>
-    service()
-      .patch(`/appattributes/${id}`, payload)
+    service
+      .patch(`/items/${id}`, payload)
       .then(response => response.data)
       .catch(error => error),
   delete: (id: any) =>
-    service()
-      .delete(`/appattributes/${id}`)
+    service
+      .delete(`/items/${id}`)
       .then(response => response.data)
-      .catch(error => error),
+      .catch(error => error)
 };
 
 export default servicesApi;

@@ -5,16 +5,18 @@ import actions from './actions';
 
 function* load() {
   try {
+
     const result = yield call(servicesApi.list);
 
     // success
     if (!result.isAxiosError) {
-      yield put(actions.loadSuccess(result));
+      yield put(actions.loadSuccess(result.itens));
       return;
     }
 
     // error
     const { message } = result;
+
     yield put(actions.loadError({ error: message }));
 
     if (result.response && result.response.status === 401) {
@@ -69,5 +71,8 @@ function* saveToApi({ payload }: any) {
 }
 
 export default function* rootSaga() {
-  yield all([takeEvery(actions.LOAD, load), takeEvery(actions.SAVE_TO_API, saveToApi)]);
+  yield all([
+    takeEvery(actions.LOAD, load),
+    takeEvery(actions.SAVE_TO_API, saveToApi)
+  ]);
 }
