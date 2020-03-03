@@ -16,7 +16,5 @@ RUN npm run build
 # Debugging option
 #ENTRYPOINT ["node", "--inspect=9229", "src/index.js"]
 
-
 EXPOSE 5000
 ENTRYPOINT ["npm", "run", "serve"]
-
