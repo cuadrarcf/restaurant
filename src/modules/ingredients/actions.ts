@@ -1,47 +1,42 @@
 const MODULE = 'INGREDIENTS';
 
 export interface IActions {
-  LOAD: string;
   LOAD_SUCCESS: string;
   LOAD_ERROR: string;
-  SAVE_TO_API: string;
+  CRUD_API: string;
   TOGGLE_HANDLE_MODAL: string;
   UPDATE_SELECTED: string;
-  load: () => { type: string };
+
+  crudApi: (actionName: string, data: any) => { payload: { data: any; actionName: string }; type: string };
   loadSuccess: (data: any) => { payload: { data: any }; type: string };
+
   loadError: (error: any) => { payload: { error: any }; type: string };
-  saveToApi: (data: any, actionName?: string) => { payload: { data: any; actionName: string }; type: string };
   toggleModal: (data?: any) => { payload: { data: any }; type: string };
   updateSelected: (data: any) => { payload: { data: any }; type: string };
 }
 
 const actions: IActions = {
-  LOAD: `LOAD_${MODULE}`,
+  CRUD_API: `CRUD_API_${MODULE}`,
   LOAD_SUCCESS: `LOAD_SUCCESS_${MODULE}`,
   LOAD_ERROR: `LOAD_ERROR_${MODULE}`,
 
-  SAVE_TO_API: `SAVE_TO_API_${MODULE}`,
+
   TOGGLE_HANDLE_MODAL: `TOGGLE_HANDLE_MODAL_${MODULE}`,
   UPDATE_SELECTED: `UPDATE_SELECTED_${MODULE}`,
 
-  // load
-  load: () => {
-    return { type: actions.LOAD };
-  },
+  crudApi: (actionName, data: any) => ({
+    type: actions.CRUD_API,
+    payload: { data, actionName }
+  }),
 
   loadSuccess: (data: any) => ({
     type: actions.LOAD_SUCCESS,
     payload: { data }
   }),
+
   loadError: (error: any) => ({
     type: actions.LOAD_ERROR,
     payload: { error }
-  }),
-
-  // edit
-  saveToApi: (data: any, actionName = 'insert') => ({
-    type: actions.SAVE_TO_API,
-    payload: { data, actionName }
   }),
 
   // modal

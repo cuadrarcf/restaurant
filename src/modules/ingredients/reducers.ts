@@ -20,7 +20,7 @@ export default function reducer(state = initState, action: any) {
   const { type, payload } = action;
 
   switch (type) {
-    case actions.LOAD:
+    case actions.CRUD_API:
       return {
         ...state,
         isLoading: true,
