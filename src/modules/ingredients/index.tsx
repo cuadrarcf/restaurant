@@ -6,14 +6,23 @@ import { AppContent } from '../../app/view/appContent';
 import { IngredientsTable } from './view/IngredientsTable';
 import actions, { IActions } from './actions';
 import { IReducer } from './reducers';
+import { AddIngredient } from './view/AddIngredient';
 import './index.css';
 
 interface IIngredientState {}
 
 class Ingredients extends React.Component<IReducer & IActions, IIngredientState> {
+  state = { visible: false };
+
   componentDidMount(): void {
     this.props.crudApi('READ', {});
   }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
 
   togglePopup(param: any) {
     console.log(`create Ingredient ${param}`);
@@ -25,6 +34,7 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     return (
       <AppContent title="Ingredients">
         <Row>
+          <AddIngredient isVisible={true} />
           <Col span={24}>
             <Button type="primary" onClick={event => this.togglePopup(null)} className="btn-add">
               <PlusCircleOutlined /> Add

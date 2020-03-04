@@ -16,7 +16,7 @@ export interface IIngredientsProps {
   onAction: (action: string, record: any) => void
 }
 
-function onAction(edit: string, record: any) {}
+// function onAction(edit: string, record: any) {}
 
 export function IngredientsTable(props: IIngredientsProps) {
   const { dataSource, isLoading, onAction } = props;

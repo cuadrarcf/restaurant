@@ -1,41 +1,59 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Form, Input, Select } from 'antd';
 
-export class AddIngredient extends React.Component {
-  state = { visible: false };
+const { Option } = Select;
+export interface IAddProps {
+  isVisible: boolean;
+}
 
-  showModal = () => {
-    this.setState({
-      visible: true
-    });
-  };
+export class AddIngredient extends React.Component<IAddProps, {}> {
+  formRef: any = React.createRef();
 
-  handleOk = (e: React.MouseEvent) => {
-    console.log(e);
-    this.setState({
-      visible: false
-    });
-  };
-
-  handleCancel = (e: React.MouseEvent) => {
-    console.log(e);
-    this.setState({
-      visible: false
-    });
+  onFinish = (values: any) => {
+    console.log('Success:', values);
   };
 
   render() {
+
+    const { isVisible } = this.props;
+
     return (
-      <div>
-        <Button type="primary" onClick={this.showModal}>
-          Open Modal
-        </Button>
-        <Modal title="Basic Modal" visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-      </div>
+      <Modal
+        title="Add Item"
+        visible={isVisible}
+        onOk={()=>this.formRef.current.submit()}
+      >
+        <Form ref={this.formRef} onFinish={this.onFinish}>
+
+          <Form.Item
+            name="note"
+            label="Note"
+            rules={[
+              {
+                required: true
+              }
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="gender"
+            label="Gender"
+            rules={[
+              {
+                required: true
+              }
+            ]}
+          >
+            <Select placeholder="Select a option and change input text above"allowClear>
+              <Option value="male">male</Option>
+              <Option value="female">female</Option>
+              <Option value="other">other</Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      </Modal>
     );
   }
 }
