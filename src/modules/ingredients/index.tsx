@@ -18,9 +18,9 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     this.props.crudApi('READ', {});
   }
 
-  showModal = () => {
+  showModal = (value: boolean) => {
     this.setState({
-      visible: true
+      visible: value
     });
   };
 
@@ -34,9 +34,9 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     return (
       <AppContent title="Ingredients">
         <Row>
-          <AddIngredient isVisible={true} />
+          <AddIngredient isVisible={this.state.visible} onToggle={value => this.showModal(value)} />
           <Col span={24}>
-            <Button type="primary" onClick={event => this.togglePopup(null)} className="btn-add">
+            <Button type="primary" onClick={event => this.showModal(true)} className="btn-add">
               <PlusCircleOutlined /> Add
             </Button>
             <IngredientsTable

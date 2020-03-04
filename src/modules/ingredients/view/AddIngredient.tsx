@@ -3,6 +3,7 @@ import { Modal, Form, Input, Select, InputNumber, Tag } from 'antd';
 
 export interface IAddProps {
   isVisible: boolean;
+  onToggle: (value: any) => void;
 }
 
 const layout = {
@@ -16,11 +17,9 @@ export interface IIngredientModel {
 }
 
 export class AddIngredient extends React.Component<IAddProps, IIngredientModel> {
-
   formRef: any = React.createRef();
 
   onFinish = (values: any) => {
-
     console.log('Success:', values);
   };
 
@@ -28,18 +27,22 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
     const { isVisible } = this.props;
 
     return (
-      <Modal title="Add Ingredient" visible={isVisible} onOk={() => this.formRef.current.submit()}>
+      <Modal
+        title="Add Ingredient"
+        visible={isVisible}
+        onOk={() => this.formRef.current.submit()}
+        onCancel={() => this.props.onToggle(null)}
+      >
         <Form {...layout} ref={this.formRef} name="basic" initialValues={{ remember: true }} onFinish={this.onFinish}>
-
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input the name!'}]}>
+          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input the name!' }]}>
             <Input />
           </Form.Item>
 
-          <Form.Item label="Quantity" name="qty" rules={[{ required: true, message: 'Please input the Quantity!'}]}>
+          <Form.Item label="Quantity" name="qty" rules={[{ required: true, message: 'Please input the Quantity!' }]}>
             <InputNumber />
           </Form.Item>
 
-          <Form.Item label="Color" name="color" rules={[{ required: true, message: 'Please input the Color!'}]}>
+          <Form.Item label="Color" name="color" rules={[{ required: true, message: 'Please input the Color!' }]}>
             <Select style={{ width: 171 }} mode="multiple">
               <Select.Option value="blue">
                 <Tag color={'blue'}>Blue</Tag>
@@ -52,7 +55,6 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
               </Select.Option>
             </Select>
           </Form.Item>
-
         </Form>
       </Modal>
     );
