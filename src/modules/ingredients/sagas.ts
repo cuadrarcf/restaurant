@@ -12,7 +12,6 @@ function* crudToApi({ payload }: any) {
     switch (actionName) {
       case 'CREATE':
         result = yield call(servicesApi.create, data);
-        setTimeout(() => MessageManager.success('Created'), 500);
         break;
 
       case 'READ':
@@ -21,22 +20,20 @@ function* crudToApi({ payload }: any) {
 
       case 'UPDATE':
         result = yield call(servicesApi.update, id, data);
-        setTimeout(() => MessageManager.success('Updated'), 500);
         break;
 
       case 'DELETE':
         result = yield call(servicesApi.delete, id);
-        setTimeout(() => MessageManager.success('Deleted'), 500);
         break;
     }
 
     // success
     if (!result.isAxiosError) {
       if (actionName === 'READ') {
-        console.log(result);
-        yield put(actions.loadSuccess(result.itens)); //{ type: actions.loadSuccess, payload: { actionName: 'READ' } }
+        yield put(actions.loadSuccess(result.itens));
       } else {
         yield put({ type: actions.CRUD_API, payload: { actionName: 'READ' } });
+        setTimeout(() => MessageManager.success(actionName), 500);
       }
       return;
     }
@@ -44,6 +41,8 @@ function* crudToApi({ payload }: any) {
     // error
     const { message } = result;
     yield put(actions.loadError({ error: message }));
+    setTimeout(() => MessageManager.error(message), 500);
+
   } catch (error) {
     yield put(actions.loadError(error));
   }
