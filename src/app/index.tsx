@@ -52,7 +52,8 @@ class App extends React.Component {
                   <Recipes />
                 </Route>
               </Switch>
-              <Footer style={{ textAlign: 'center' }}>Restaurant ©2020 Created by <a href="https://www.linkedin.com/in/roberley">Roberley Cuadra.</a></Footer>
+              <Footer style={{ textAlign: 'center' }}>
+                Restaurant ©2020 Created by <a href="https://www.linkedin.com/in/roberley">Roberley Cuadra.</a></Footer>
             </Layout>
           </Layout>
         </Router>

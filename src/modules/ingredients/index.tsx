@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Col, Row } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import { AppContent } from '../../app/view/appContent';
 import { IngredientsTable } from './view/IngredientsTable';
 import actions, { IActions } from './actions';
 import { IReducer } from './reducers';
+import './index.css'
 
-interface IIngredientState {}
+interface IIngredientState {
 
-class Ingredients extends React.Component<IReducer & IActions, IIngredientState> {
+}
+
+class Ingredients extends React.Component<IReducer & IActions , IIngredientState> {
 
   componentDidMount(): void {
     this.props.load();
@@ -20,15 +24,15 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
 
   render() {
 
-    const {models, isLoading} = this.props;
+    const { models, isLoading } = this.props;
 
     return (
       <AppContent title="Ingredients">
         <Row>
           <Col span={24}>
-            <Button type="primary" onClick={event => this.togglePopup(null)}>
-              Add
-            </Button>
+              <Button type="primary" onClick={event => this.togglePopup(null)} className="btn-add">
+                <PlusCircleOutlined /> Add
+              </Button>
             <IngredientsTable dataSource={models} isLoading={isLoading} />
           </Col>
         </Row>
