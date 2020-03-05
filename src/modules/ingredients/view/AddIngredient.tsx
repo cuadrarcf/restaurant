@@ -33,7 +33,7 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
         onOk={() => this.formRef.current.submit()}
         onCancel={() => this.props.onToggle(null)}
       >
-        <Form {...layout} ref={this.formRef} name="basic" initialValues={{ remember: true }} onFinish={this.onFinish}>
+        <Form {...layout} ref={this.formRef} name="basic" initialValues={{ remember: true, qty:0 }} onFinish={this.onFinish}>
           <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input the name!' }]}>
             <Input />
           </Form.Item>
