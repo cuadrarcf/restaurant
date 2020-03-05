@@ -15,7 +15,7 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
   state = { visible: false };
 
   componentDidMount(): void {
-    this.props.crudApi('READ', {});
+    this.props.onCrudApi('READ', {});
   }
 
   showModal = (value: boolean | null) => {
@@ -55,9 +55,9 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
 
   private onAction(action: string, record: IIngredient) {
     if(action === 'SELECT'){
-      this.props.updateSelected(record);
+      this.props.onUpdateSelected(record);
     } else {
-      this.props.crudApi(action, record);
+      this.props.onCrudApi(action, record);
     }
   }
 }

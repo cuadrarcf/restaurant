@@ -30,7 +30,7 @@ function* crudToApi({ payload }: any) {
     // success
     if (!result.isAxiosError) {
       if (actionName === 'READ') {
-        yield put(actions.loadSuccess(result.itens));
+        yield put(actions.onLoadSuccess(result.itens));
       } else {
         yield put({ type: actions.CRUD_API, payload: { actionName: 'READ' } });
         setTimeout(() => MessageManager.success(actionName), 500);
@@ -40,11 +40,11 @@ function* crudToApi({ payload }: any) {
 
     // error
     const { message } = result;
-    yield put(actions.loadError({ error: message }));
+    yield put(actions.onLoadError({ error: message }));
     setTimeout(() => MessageManager.error(message), 500);
 
   } catch (error) {
-    yield put(actions.loadError(error));
+    yield put(actions.onLoadError(error));
   }
 }
 

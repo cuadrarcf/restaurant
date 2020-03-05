@@ -6,11 +6,11 @@ export interface IActions {
   CRUD_API: string;
   UPDATE_SELECTED: string;
 
-  crudApi: (actionName: string, data: any) => { payload: { data: any; actionName: string }; type: string };
-  loadSuccess: (data: any) => { payload: { data: any }; type: string };
+  onCrudApi: (actionName: string, data: any) => { payload: { data: any; actionName: string }; type: string };
+  onLoadSuccess: (data: any) => { payload: { data: any }; type: string };
 
-  loadError: (error: any) => { payload: { error: any }; type: string };
-  updateSelected: (data: any) => { payload: { data: any }; type: string };
+  onLoadError: (error: any) => { payload: { error: any }; type: string };
+  onUpdateSelected: (data: any) => { payload: { data: any }; type: string };
 }
 
 const actions: IActions = {
@@ -19,21 +19,25 @@ const actions: IActions = {
   LOAD_ERROR: `LOAD_ERROR_${MODULE}`,
   UPDATE_SELECTED: `UPDATE_SELECTED_${MODULE}`,
 
-  crudApi: (actionName, data: any) => ({
+  onCrudApi: (actionName, data: any) => ({
     type: actions.CRUD_API,
     payload: { data, actionName }
   }),
-  loadSuccess: (data: any) => ({
+
+  onLoadSuccess: (data: any) => ({
     type: actions.LOAD_SUCCESS,
     payload: { data }
   }),
-  loadError: (error: any) => ({
+
+  onLoadError: (error: any) => ({
     type: actions.LOAD_ERROR,
     payload: { error }
   }),
-  updateSelected: (data: any) => ({
+
+  onUpdateSelected: (data: any) => ({
     type: actions.UPDATE_SELECTED,
     payload: { data }
   })
 };
+
 export default actions;
