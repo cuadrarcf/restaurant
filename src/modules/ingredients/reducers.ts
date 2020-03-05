@@ -43,13 +43,6 @@ export default function reducer(state = initState, action: any) {
         errorMessage: 'There is a loading problem'
       };
 
-    case actions.TOGGLE_HANDLE_MODAL:
-      return {
-        ...state,
-        modalActive: !state.modalActive,
-        selected: payload.data || null
-      };
-
     case actions.UPDATE_SELECTED:
       return {
         ...state,

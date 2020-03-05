@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Col, Row } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { AppContent } from '../../app/view/appContent';
-import { IngredientsTable } from './view/IngredientsTable';
+import { IIngredient, IngredientsTable } from './view/IngredientsTable';
 import actions, { IActions } from './actions';
 import { IReducer } from './reducers';
 import { AddIngredient } from './view/AddIngredient';
@@ -26,7 +26,9 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
 
 
   render() {
-    const { models, isLoading } = this.props;
+    const { models, isLoading, selected } = this.props;
+
+    console.log(selected);
 
     return (
       <AppContent title="Ingredients">
@@ -51,8 +53,12 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     );
   }
 
-  private onAction(action: string, record: any) {
-    this.props.crudApi(action, record);
+  private onAction(action: string, record: IIngredient) {
+    if(action === 'SELECT'){
+      this.props.updateSelected(record);
+    } else {
+      this.props.crudApi(action, record);
+    }
   }
 }
 

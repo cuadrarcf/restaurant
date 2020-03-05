@@ -13,10 +13,8 @@ export interface IIngredient {
 export interface IIngredientsProps {
   dataSource: IIngredient[];
   isLoading: boolean;
-  onAction: (action: string, record: any) => void;
+  onAction: (action: string, record: IIngredient) => void;
 }
-
-// function onAction(edit: string, record: any) {}
 
 export function IngredientsTable(props: IIngredientsProps) {
   const { dataSource, isLoading, onAction } = props;
@@ -54,7 +52,7 @@ export function IngredientsTable(props: IIngredientsProps) {
       dataIndex: 'operation',
       render: (text: string, record: any) => (
         <div>
-          <Button type="link" onClick={() => onAction('EDIT', record)}>
+          <Button type="link" onClick={() => onAction('SELECT', record)}>
             <FormOutlined />
           </Button>
           <Divider type="vertical" />
