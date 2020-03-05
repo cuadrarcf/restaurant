@@ -18,15 +18,12 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     this.props.crudApi('READ', {});
   }
 
-  showModal = (value: boolean) => {
+  showModal = (value: boolean | null) => {
     this.setState({
       visible: value
     });
   };
 
-  togglePopup(param: any) {
-    console.log(`create Ingredient ${param}`);
-  }
 
   render() {
     const { models, isLoading } = this.props;
@@ -34,7 +31,11 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     return (
       <AppContent title="Ingredients">
         <Row>
-          <AddIngredient isVisible={this.state.visible} onToggle={value => this.showModal(value)} />
+          <AddIngredient
+            isVisible={this.state.visible}
+            onToggle={value => this.showModal(value)}
+            onOk={value => this.onAction('CREATE', value)}
+          />
           <Col span={24}>
             <Button type="primary" onClick={event => this.showModal(true)} className="btn-add">
               <PlusCircleOutlined /> Add

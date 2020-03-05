@@ -3,12 +3,9 @@ import { Modal, Form, Input, Select, InputNumber, Tag } from 'antd';
 
 export interface IAddProps {
   isVisible: boolean;
-  onToggle: (value: any) => void;
+  onToggle: (value: boolean | null) => void;
+  onOk: (value: any) => void;
 }
-
-const layout = {
-  labelCol: { span: 8 }
-};
 
 export interface IIngredientModel {
   name: string;
@@ -16,11 +13,19 @@ export interface IIngredientModel {
   color: string[];
 }
 
+const layout = {
+  labelCol: { span: 8 }
+};
+
+
 export class AddIngredient extends React.Component<IAddProps, IIngredientModel> {
   formRef: any = React.createRef();
+  state = { qty: 0, color: [], name: '', remember: true };
 
   onFinish = (values: any) => {
     console.log('Success:', values);
+    this.props.onOk(values);
+    this.props.onToggle(false);
   };
 
   render() {
@@ -33,7 +38,7 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
         onOk={() => this.formRef.current.submit()}
         onCancel={() => this.props.onToggle(null)}
       >
-        <Form {...layout} ref={this.formRef} name="basic" initialValues={{ remember: true, qty:0 }} onFinish={this.onFinish}>
+        <Form {...layout} ref={this.formRef} initialValues={this.state} onFinish={this.onFinish}>
           <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input the name!' }]}>
             <Input />
           </Form.Item>
