@@ -23,7 +23,6 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
   state = { qty: 0, color: [], name: '', remember: true };
 
   onFinish = (values: any) => {
-    console.log('Success:', values);
     this.props.onOk(values);
     this.props.onToggle(false);
   };
@@ -37,6 +36,7 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
         visible={isVisible}
         onOk={() => this.formRef.current.submit()}
         onCancel={() => this.props.onToggle(null)}
+        destroyOnClose={true}
       >
         <Form {...layout} ref={this.formRef} initialValues={this.state} onFinish={this.onFinish}>
           <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input the name!' }]}>

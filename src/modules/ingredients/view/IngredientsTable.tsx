@@ -13,7 +13,7 @@ export interface IIngredient {
 export interface IIngredientsProps {
   dataSource: IIngredient[];
   isLoading: boolean;
-  onAction: (action: string, record: any) => void
+  onAction: (action: string, record: any) => void;
 }
 
 // function onAction(edit: string, record: any) {}
