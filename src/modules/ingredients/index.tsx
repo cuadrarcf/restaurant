@@ -18,28 +18,20 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
     this.props.onCrudApi('READ', {});
   }
 
-  showModal = (value: boolean | null) => {
-    this.setState({
-      visible: value
-    });
-  };
-
-
   render() {
     const { models, isLoading, selected } = this.props;
-
-    console.log(selected);
 
     return (
       <AppContent title="Ingredients">
         <Row>
           <AddIngredient
-            isVisible={this.state.visible}
-            onToggle={value => this.showModal(value)}
+            isVisible={selected !== null}
+            onClose={() => this.props.onUpdateSelected(null)}
             onOk={value => this.onAction('CREATE', value)}
+            selected={selected}
           />
           <Col span={24}>
-            <Button type="primary" onClick={event => this.showModal(true)} className="btn-add">
+            <Button type="primary" onClick={event => this.props.onUpdateSelected({})} className="btn-add">
               <PlusCircleOutlined /> Add
             </Button>
             <IngredientsTable

@@ -1,16 +1,19 @@
 import React from 'react';
 import { Modal, Form, Input, Select, InputNumber, Tag } from 'antd';
 
-export interface IAddProps {
-  isVisible: boolean;
-  onToggle: (value: boolean | null) => void;
-  onOk: (value: any) => void;
-}
-
 export interface IIngredientModel {
+  id?: string;
   name: string;
   qty: number;
   color: string[];
+}
+
+
+export interface IAddProps {
+  isVisible: boolean;
+  selected?: IIngredientModel | null;
+  onClose: () => void;
+  onOk: (value: any) => void;
 }
 
 const layout = {
@@ -24,8 +27,30 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
 
   onFinish = (values: any) => {
     this.props.onOk(values);
-    this.props.onToggle(false);
+    this.props.onClose();
   };
+
+
+  // getSnapshotBeforeUpdate(prevProps: Readonly<IAddProps>, prevState: Readonly<IIngredientModel>): any | null {
+  //
+  // }
+
+  static getDerivedStateFromProps(props: Readonly<IAddProps>, state: Readonly<IIngredientModel>): IIngredientModel | null {
+    const { selected } = props;
+
+    if(!selected) return null;
+
+    if (selected.id && selected.id !== state.id) {
+      return {
+        id: selected.id,
+        name: selected.name,
+        qty: selected.qty,
+        color: selected.color
+      };
+    }
+
+    return null;
+  }
 
   render() {
     const { isVisible } = this.props;
@@ -35,7 +60,7 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
         title="Add Ingredient"
         visible={isVisible}
         onOk={() => this.formRef.current.submit()}
-        onCancel={() => this.props.onToggle(null)}
+        onCancel={() => this.props.onClose()}
         destroyOnClose={true}
       >
         <Form {...layout} ref={this.formRef} initialValues={this.state} onFinish={this.onFinish}>
