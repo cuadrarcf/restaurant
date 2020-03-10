@@ -21,15 +21,24 @@ class Ingredients extends React.Component<IReducer & IActions, IIngredientState>
   render() {
     const { models, isLoading, selected } = this.props;
 
+    console.log(selected);
+
     return (
       <AppContent title="Ingredients">
         <Row>
-          <AddIngredient
-            isVisible={selected !== null}
-            onClose={() => this.props.onUpdateSelected(null)}
-            onOk={value => this.onAction('CREATE', value)}
-            selected={selected}
-          />
+
+          {
+            selected && (
+              <AddIngredient
+                title={ (!!selected && selected.id) ? 'Edit Ingredient' : 'Add Ingredient'}
+                isVisible={selected !== null}
+                onClose={() => this.props.onUpdateSelected(null)}
+                onOk={value => this.onAction('CREATE', value)}
+                selected={selected}
+              />
+            )
+          }
+
           <Col span={24}>
             <Button type="primary" onClick={event => this.props.onUpdateSelected({})} className="btn-add">
               <PlusCircleOutlined /> Add

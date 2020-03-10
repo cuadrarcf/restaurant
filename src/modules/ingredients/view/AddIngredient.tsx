@@ -9,6 +9,7 @@ export interface IIngredientModel {
 }
 
 export interface IAddProps {
+  title: string;
   isVisible: boolean;
   selected?: IIngredientModel | null;
   onClose: () => void;
@@ -54,11 +55,11 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
   };
 
   render() {
-    const { isVisible } = this.props;
+    const { isVisible, title } = this.props;
 
     return (
       <Modal
-        title="Add Ingredient"
+        title={title}
         visible={isVisible}
         onOk={() => this.formRef.current.submit()}
         onCancel={() => this.props.onClose()}
