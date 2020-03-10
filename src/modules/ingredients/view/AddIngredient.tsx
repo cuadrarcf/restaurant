@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Select, InputNumber, Tag } from 'antd';
+import { Modal, Form, Input, Select, InputNumber } from 'antd';
 
 export interface IIngredientModel {
   id?: string;
@@ -20,14 +20,16 @@ const layout = {
 };
 
 
-export class AddIngredient extends React.Component<IAddProps, IIngredientModel> {
-  formRef: any = React.createRef();
-  state = { qty: 0, colors: [], name: '', remember: true };
+const defaultState: IIngredientModel = {
+  name: '',
+  qty: 0,
+  colors: [],
+};
 
-  onFinish = (values: any) => {
-    this.props.onOk(values);
-    this.props.onClose();
-  };
+export class AddIngredient extends React.Component<IAddProps, IIngredientModel> {
+
+  formRef: any = React.createRef();
+  state = {...defaultState};
 
   static getDerivedStateFromProps(props: Readonly<IAddProps>, state: Readonly<IIngredientModel>): IIngredientModel | null {
     const { selected } = props;
@@ -43,9 +45,13 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
         colors
       };
     }
-
-    return { qty: 0, colors: [], name: '' };
+    return defaultState;
   }
+
+  onFinish = (values: any) => {
+    this.props.onOk(values);
+    this.props.onClose();
+  };
 
   render() {
     const { isVisible } = this.props;
