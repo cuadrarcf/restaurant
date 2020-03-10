@@ -8,7 +8,6 @@ export interface IIngredientModel {
   colors: string[];
 }
 
-
 export interface IAddProps {
   isVisible: boolean;
   selected?: IIngredientModel | null;
@@ -36,16 +35,16 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
     if(!selected) return null;
 
     if (selected.id && selected.id !== state.id) {
-
+      const {id, qty, name, colors} = selected;
       return {
-        id: selected.id,
-        name: selected.name,
-        qty: selected.qty,
-        colors: selected.colors
+        id,
+        name,
+        qty,
+        colors
       };
     }
 
-    return null;
+    return { qty: 0, colors: [], name: '' };
   }
 
   render() {
@@ -69,15 +68,15 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
           </Form.Item>
 
           <Form.Item label="Color" name="colors" rules={[{ required: true, message: 'Please input the Color!' }]}>
-            <Select style={{ width: 171 }} mode="multiple" defaultValue={this.state.colors}>
+            <Select style={{ width: 171 }} mode="multiple">
               <Select.Option value="blue">
-                <Tag color={'blue'}>Blue</Tag>
+                 Blue
               </Select.Option>
               <Select.Option value="red">
-                <Tag color={'red'}>Red</Tag>
+                Red
               </Select.Option>
               <Select.Option value="green">
-                <Tag color={'green'}>Green</Tag>
+                Green
               </Select.Option>
             </Select>
           </Form.Item>
