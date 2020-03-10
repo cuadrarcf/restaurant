@@ -5,7 +5,7 @@ export interface IIngredientModel {
   id?: string;
   name: string;
   qty: number;
-  color: string[];
+  colors: string[];
 }
 
 
@@ -23,17 +23,12 @@ const layout = {
 
 export class AddIngredient extends React.Component<IAddProps, IIngredientModel> {
   formRef: any = React.createRef();
-  state = { qty: 0, color: [], name: '', remember: true };
+  state = { qty: 0, colors: [], name: '', remember: true };
 
   onFinish = (values: any) => {
     this.props.onOk(values);
     this.props.onClose();
   };
-
-
-  // getSnapshotBeforeUpdate(prevProps: Readonly<IAddProps>, prevState: Readonly<IIngredientModel>): any | null {
-  //
-  // }
 
   static getDerivedStateFromProps(props: Readonly<IAddProps>, state: Readonly<IIngredientModel>): IIngredientModel | null {
     const { selected } = props;
@@ -41,11 +36,12 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
     if(!selected) return null;
 
     if (selected.id && selected.id !== state.id) {
+
       return {
         id: selected.id,
         name: selected.name,
         qty: selected.qty,
-        color: selected.color
+        colors: selected.colors
       };
     }
 
@@ -72,8 +68,8 @@ export class AddIngredient extends React.Component<IAddProps, IIngredientModel> 
             <InputNumber />
           </Form.Item>
 
-          <Form.Item label="Color" name="color" rules={[{ required: true, message: 'Please input the Color!' }]}>
-            <Select style={{ width: 171 }} mode="multiple">
+          <Form.Item label="Color" name="colors" rules={[{ required: true, message: 'Please input the Color!' }]}>
+            <Select style={{ width: 171 }} mode="multiple" defaultValue={this.state.colors}>
               <Select.Option value="blue">
                 <Tag color={'blue'}>Blue</Tag>
               </Select.Option>
